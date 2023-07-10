@@ -16,6 +16,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
+using Tobii.XR;
+
 
 #if PICO_SUPPORTED
 using PicoInput = Unity.XR.PXR.PXR_Input;
@@ -131,11 +133,13 @@ namespace TiltBrush
                 // TODO:Mike - We need to set a controller style, is it best here or is it best later when controllers register themselves?
                 // Does this entire system need a rethink for the 'modularity' of the XR subsystem?
                 InputDevice tryGetUnityXRController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+                Debug.Log("input device " + tryGetUnityXRController.name);
                 if (!tryGetUnityXRController.isValid)
                 {
                     // Try the right hand instead
                     tryGetUnityXRController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
                 }
+                
 
                 if (!tryGetUnityXRController.isValid)
                 {
@@ -194,6 +198,8 @@ namespace TiltBrush
                 Pimax.Platform.PvrConnectToDLL.pvr_PlatformInit(pimaxClientId);
             }
 #endif // PIMAX_SUPPORTED
+            
+
         }
 
         void Start()
@@ -214,6 +220,9 @@ namespace TiltBrush
                 ControllerConsoleScript.m_Instance.AttachToController(m_VrControls.Brush);
                 m_NeedsToAttachConsoleScript = false;
             }
+            Debug.Log("Starting TObii");
+            TobiiXR.Start();
+            Debug.Log("Started TObii");
         }
 
         void Update()

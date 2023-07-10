@@ -11,8 +11,43 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 07df4d63df340f74ca58824df3cab9ea
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_Bust.unity
+    guid: 27f9ce18e2c232643a6bc979fa86ea15
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_Cave.unity
+    guid: 6dd87d3aab14f2948a5631bfe7e4852d
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_City.unity
+    guid: 832b81c7c9382b7409c05badf3a8bc13
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_DesertDay.unity
+    guid: 9b2d1074953f35044a054c72ab29e620
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_DressForm.unity
+    guid: 0a4b760343eafbb41ae9f6dceb5b06d9
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_NightSky.unity
+    guid: 4a7a2094d72214248988a4edda555b4c
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_Pedestal.unity
+    guid: cedbe3a47be2ae644b6101b53fd947c0
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_Skeleton.unity
+    guid: 5ec406382096cbb438a4d1a82e5b8145
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_Snowman.unity
+    guid: 725210505db6b524380b478b7f74cb1e
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_Space.unity
+    guid: f5acc8ab4b2e0ac47b85586d2bf147aa
+  - enabled: 0
+    path: Assets/Scenes/Lighting/Lighting_TiltBrushStudio.unity
+    guid: 6296e3cdbd8784049921f26210fc440c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 71fe6cc6ea2fd8841ab44d5442834cc6,
+      type: 2}
+    Unity.XR.PICO.LivePreview.Settings: {fileID: 11400000, guid: 45b07d89e1512424390cfc255b7f369d,
       type: 2}
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: b01e30ce9b062fd439c1d9a04a30cc7e,
       type: 2}
