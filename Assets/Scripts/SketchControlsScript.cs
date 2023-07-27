@@ -149,7 +149,9 @@ namespace TiltBrush
             SymmetryTwoHanded = 6003,
             OpenColorOptionsPopup = 7000,
             ChangeSnapAngle = 8000,
-            MergeBrushStrokes = 10000
+            MergeBrushStrokes = 10000,
+            RepaintOptions = 11500,
+            OpenNumericInputPopup = 12000
         }
 
         public enum ControlsType
@@ -770,6 +772,7 @@ namespace TiltBrush
         {
             get { return GetComponent<IconTextureAtlas>(); }
         }
+        public GrabWidget CurrentGrabWidget => m_CurrentGrabWidget;
 
         void DismissPopupOnCurrentGazeObject(bool force)
         {
@@ -975,8 +978,8 @@ namespace TiltBrush
             m_SketchSurfacePanel.m_UpdatedToolThisFrame = false;
 
             // Verify controllers are available and prune state if they're not.
-            if (App.VrSdk.GetControllerDof() == VrSdk.DoF.Six &&
-                App.VrSdk.IsInitializingUnityXR)
+            if ((App.VrSdk.GetControllerDof() == VrSdk.DoF.Six &&
+                App.VrSdk.IsInitializingUnityXR) && App.VrSdk.IsHmdInitialized())
             {
                 m_PanelManager.SetVisible(false);
                 PointerManager.m_Instance.RequestPointerRendering(false);
@@ -1449,6 +1452,11 @@ namespace TiltBrush
                     InputManager.KeyboardShortcut.Reset))
                 {
                     App.Instance.SetDesiredState(App.AppState.LoadingBrushesAndLighting);
+                }
+                else if (InputManager.m_Instance.GetKeyboardShortcutDown(
+                             InputManager.KeyboardShortcut.FlyMode))
+                {
+                    SketchSurfacePanel.m_Instance.EnableSpecificTool(BaseTool.ToolType.FlyTool);
                 }
                 else if (App.Config.m_ToggleProfileOnAppButton &&
                     (InputManager.Wand.GetVrInputDown(VrInput.Button03) ||
@@ -4097,7 +4105,7 @@ namespace TiltBrush
             }
         }
 
-        private void LoadSketch(SceneFileInfo fileInfo, bool quickload = false, bool additive = false)
+        public void LoadSketch(SceneFileInfo fileInfo, bool quickload = false, bool additive = false)
         {
             LightsControlScript.m_Instance.DiscoMode = false;
             m_WidgetManager.FollowingPath = false;
@@ -4523,7 +4531,10 @@ namespace TiltBrush
                     {
                         var sketchSetType = (SketchSetType)iParam2;
                         SketchSet sketchSet = SketchCatalog.m_Instance.GetSet(sketchSetType);
-                        sketchSet.RenameSketch(iParam1, KeyboardPopUpWindow.m_LastInput);
+                        if (sketchSetType == SketchSetType.User)
+                        {
+                            sketchSet.RenameSketch(iParam1, KeyboardPopUpWindow.m_LastInput);
+                        }
                         DismissPopupOnCurrentGazeObject(false);
                         break;
                     }
@@ -4907,6 +4918,7 @@ namespace TiltBrush
                     // TODO refactor code above to use this method
                     OpenUrl($"http://localhost:{App.HttpServer.HttpPort}/examplescripts");
                     break;
+                case GlobalCommands.RepaintOptions: break; // Intentionally blank.
                 case GlobalCommands.Null: break; // Intentionally blank.
                 default:
                     Debug.LogError($"Unrecognized command {rEnum}");

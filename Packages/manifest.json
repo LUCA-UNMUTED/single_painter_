@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.atteneder.gltfast": "5.0.4",
     "com.meta.xr.sdk.utilities": "https://github.com/icosa-mirror/com.meta.xr.sdk.utilities.git#open-brush",
     "com.tobii.xr.sdk": "file:C:/Users/student/Downloads/TobiiXRSDK_3.0.1.179",
     "com.unity.2d.sprite": "1.0.0",
@@ -59,6 +60,13 @@
     "com.unity.modules.wind": "1.0.0"
   },
   "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.atteneder"
+      ]
+    },
     {
       "name": "Vive",
       "url": "https://npm-registry.vive.com",
